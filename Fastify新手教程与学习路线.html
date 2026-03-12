@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="zh-CN">
   <head>
     <meta charset="UTF-8" />
@@ -6,12 +6,16 @@
     <title>Fastify 新手教程与学习路线（前端转全栈）</title>
     <style>
       :root {
-        --bg: #f7f8fa;
+        --bg: #f4f7f9;
         --panel: #ffffff;
-        --text: #1f2937;
-        --muted: #6b7280;
-        --line: #e5e7eb;
-        --primary: #0f766e;
+        --text: #2c3e50;
+        --muted: #7f8c8d;
+        --line: #dcdfe6;
+        --primary: #409eff;
+        --primary-light: #ecf5ff;
+        --secondary: #67c23a;
+        --code-bg: #282c34;
+        --code-text: #abb2bf;
       }
 
       * {
@@ -20,91 +24,144 @@
 
       body {
         margin: 0;
-        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        font-family: "Helvetica Neue", Helvetica, "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", Arial, sans-serif;
         background: var(--bg);
         color: var(--text);
-        line-height: 1.65;
+        line-height: 1.8;
       }
 
       .container {
-        max-width: 980px;
-        margin: 32px auto;
-        padding: 0 16px 40px;
+        max-width: 900px;
+        margin: 40px auto;
+        padding: 0 20px;
       }
 
       .card {
         background: var(--panel);
-        border: 1px solid var(--line);
         border-radius: 12px;
-        padding: 24px;
-      }
-
-      h1, h2, h3 {
-        margin-top: 0;
-        color: #111827;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+        padding: 40px;
+        border: 1px solid var(--line);
       }
 
       h1 {
-        font-size: 30px;
-        margin-bottom: 8px;
+        font-size: 32px;
+        color: #1a1a1a;
+        margin-bottom: 16px;
+        text-align: center;
+        border-bottom: 2px solid var(--primary);
+        padding-bottom: 16px;
       }
 
       h2 {
-        font-size: 22px;
-        margin-top: 28px;
-        border-left: 4px solid var(--primary);
-        padding-left: 10px;
+        font-size: 24px;
+        margin-top: 40px;
+        margin-bottom: 20px;
+        padding-left: 12px;
+        border-left: 5px solid var(--primary);
+        color: #1a1a1a;
+        background: var(--primary-light);
+        padding-top: 8px;
+        padding-bottom: 8px;
+        border-radius: 0 4px 4px 0;
       }
 
       h3 {
-        font-size: 18px;
-        margin-top: 20px;
+        font-size: 20px;
+        margin-top: 30px;
+        color: var(--primary);
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 8px;
       }
 
       p {
-        margin: 10px 0;
+        margin: 16px 0;
       }
 
       ul, ol {
-        margin: 10px 0 14px 22px;
+        margin: 16px 0;
+        padding-left: 24px;
+      }
+
+      li {
+        margin-bottom: 8px;
       }
 
       code {
-        background: #f3f4f6;
-        border: 1px solid #e5e7eb;
+        background: #f0f2f5;
+        color: #e74c3c;
         border-radius: 4px;
         padding: 2px 6px;
-        font-family: Consolas, "Courier New", monospace;
-        font-size: 0.92em;
+        font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace;
+        font-size: 0.9em;
       }
 
       pre {
-        background: #0b1020;
-        color: #e5e7eb;
+        background: var(--code-bg);
+        color: var(--code-text);
         border-radius: 8px;
-        padding: 12px;
+        padding: 20px;
         overflow-x: auto;
+        margin: 20px 0;
+        line-height: 1.5;
+        font-size: 14px;
       }
 
       pre code {
         background: transparent;
-        border: 0;
-        padding: 0;
         color: inherit;
+        padding: 0;
+        border-radius: 0;
       }
 
       a {
         color: var(--primary);
+        text-decoration: none;
+        transition: color 0.2s;
+      }
+
+      a:hover {
+        color: #66b1ff;
+        text-decoration: underline;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin: 24px 0;
+      }
+
+      th, td {
+        border: 1px solid var(--line);
+        padding: 12px 15px;
+        text-align: left;
+      }
+
+      th {
+        background-color: var(--primary-light);
+        color: #333;
+        font-weight: 600;
+      }
+
+      tr:nth-child(even) {
+        background-color: #fafafa;
       }
 
       hr {
         border: none;
-        border-top: 1px dashed var(--line);
-        margin: 22px 0;
+        border-top: 1px solid var(--line);
+        margin: 32px 0;
       }
 
       .muted {
         color: var(--muted);
+        font-size: 0.95em;
+        text-align: center;
+        margin-bottom: 32px;
+      }
+
+      strong {
+        color: #e67e22;
       }
     </style>
   </head>
@@ -115,8 +172,6 @@
         <p class="muted">
           适用场景：前端团队从 Fastify 入门后端，以“每周备菜助手”小程序作为试验项目。
         </p>
-
-        <hr />
 
         <h2>定位与目标</h2>
         <p>
@@ -201,7 +256,7 @@
           <li><code>plans</code>：每周计划（按天/餐次）</li>
           <li><code>shopping-list</code>：从周计划聚合采购清单</li>
         </ul>
-        <p>最小业务闭环：<code>创建菜谱 -&gt; 生成周计划 -&gt; 自动汇总采购清单</code></p>
+        <p>最小业务闭环：<strong>创建菜谱 -> 生成周计划 -> 自动汇总采购清单</strong></p>
 
         <h2>四、推荐技术栈（Fastify 入门友好）</h2>
         <ul>
@@ -300,7 +355,7 @@ JWT_EXPIRES_IN=7d</code></pre>
 
         <h2>十、团队工程规范（建议统一）</h2>
         <ul>
-          <li>模块固定三层：<code>route -&gt; service -&gt; schema</code></li>
+          <li>模块固定三层：<code>route -> service -> schema</code></li>
           <li>所有接口都定义 <code>schema</code>（body/query/response）</li>
           <li>受保护接口统一挂 <code>preHandler: [authenticate]</code></li>
           <li>错误统一走 <code>setErrorHandler</code></li>
@@ -333,7 +388,7 @@ JWT_EXPIRES_IN=7d</code></pre>
           <li><code>npm run dev</code> 可稳定一次启动</li>
           <li>Swagger 可直接调试核心接口</li>
           <li>至少 6 条核心接口测试通过</li>
-          <li>可演示闭环：<code>菜谱 -&gt; 周计划 -&gt; 采购清单</code></li>
+          <li>可演示闭环：<strong>菜谱 -> 周计划 -> 采购清单</strong></li>
         </ul>
       </article>
     </main>
