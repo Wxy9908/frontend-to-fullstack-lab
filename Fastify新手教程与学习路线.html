@@ -1,0 +1,341 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Fastify 新手教程与学习路线（前端转全栈）</title>
+    <style>
+      :root {
+        --bg: #f7f8fa;
+        --panel: #ffffff;
+        --text: #1f2937;
+        --muted: #6b7280;
+        --line: #e5e7eb;
+        --primary: #0f766e;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
+        background: var(--bg);
+        color: var(--text);
+        line-height: 1.65;
+      }
+
+      .container {
+        max-width: 980px;
+        margin: 32px auto;
+        padding: 0 16px 40px;
+      }
+
+      .card {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 12px;
+        padding: 24px;
+      }
+
+      h1, h2, h3 {
+        margin-top: 0;
+        color: #111827;
+      }
+
+      h1 {
+        font-size: 30px;
+        margin-bottom: 8px;
+      }
+
+      h2 {
+        font-size: 22px;
+        margin-top: 28px;
+        border-left: 4px solid var(--primary);
+        padding-left: 10px;
+      }
+
+      h3 {
+        font-size: 18px;
+        margin-top: 20px;
+      }
+
+      p {
+        margin: 10px 0;
+      }
+
+      ul, ol {
+        margin: 10px 0 14px 22px;
+      }
+
+      code {
+        background: #f3f4f6;
+        border: 1px solid #e5e7eb;
+        border-radius: 4px;
+        padding: 2px 6px;
+        font-family: Consolas, "Courier New", monospace;
+        font-size: 0.92em;
+      }
+
+      pre {
+        background: #0b1020;
+        color: #e5e7eb;
+        border-radius: 8px;
+        padding: 12px;
+        overflow-x: auto;
+      }
+
+      pre code {
+        background: transparent;
+        border: 0;
+        padding: 0;
+        color: inherit;
+      }
+
+      a {
+        color: var(--primary);
+      }
+
+      hr {
+        border: none;
+        border-top: 1px dashed var(--line);
+        margin: 22px 0;
+      }
+
+      .muted {
+        color: var(--muted);
+      }
+    </style>
+  </head>
+  <body>
+    <main class="container">
+      <article class="card">
+        <h1>Fastify 新手教程与学习路线（前端转全栈）</h1>
+        <p class="muted">
+          适用场景：前端团队从 Fastify 入门后端，以“每周备菜助手”小程序作为试验项目。
+        </p>
+
+        <hr />
+
+        <h2>定位与目标</h2>
+        <p>
+          你已确定从 <code>Fastify</code> 入门，并更看重工程化能力。本路线围绕“每周备菜助手”小程序场景，目标是在 1-2 周内跑通后端 MVP，并评估“从学习到运用”的真实难度。
+        </p>
+
+        <h2>一、官方文档学习顺序（建议按序）</h2>
+        <ul>
+          <li>官方文档总入口（Latest）：<a href="https://fastify.dev/docs/latest/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/</a></li>
+          <li>快速开始：<a href="https://fastify.dev/docs/latest/Guides/Getting-Started/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Guides/Getting-Started/</a></li>
+          <li>路由：<a href="https://fastify.dev/docs/latest/Reference/Routes/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Reference/Routes/</a></li>
+          <li>校验与序列化：<a href="https://fastify.dev/docs/latest/Reference/Validation-and-Serialization/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Reference/Validation-and-Serialization/</a></li>
+          <li>插件机制：<a href="https://fastify.dev/docs/latest/Reference/Plugins/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Reference/Plugins/</a></li>
+          <li>生命周期 Hooks：<a href="https://fastify.dev/docs/latest/Reference/Hooks/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Reference/Hooks/</a></li>
+          <li>错误处理：<a href="https://fastify.dev/docs/latest/Reference/Errors/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Reference/Errors/</a></li>
+          <li>TypeScript：<a href="https://fastify.dev/docs/latest/Reference/TypeScript/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Reference/TypeScript/</a></li>
+          <li>测试指南：<a href="https://fastify.dev/docs/latest/Guides/Testing/" target="_blank" rel="noopener noreferrer">https://fastify.dev/docs/latest/Guides/Testing/</a></li>
+        </ul>
+
+        <h2>二、7 天新手上手教程</h2>
+
+        <h3>Day 1：跑通最小服务</h3>
+        <ol>
+          <li>初始化 TS 项目并安装 <code>fastify</code></li>
+          <li>编写 <code>GET /health</code> 接口</li>
+          <li>启动服务，理解 <code>listen</code> 与 <code>logger</code></li>
+        </ol>
+        <p>目标：理解后端服务最小运行方式。</p>
+
+        <h3>Day 2：掌握声明式 API</h3>
+        <ol>
+          <li>编写 <code>POST /recipes</code>、<code>GET /recipes</code></li>
+          <li>为请求体和响应定义 <code>schema</code></li>
+          <li>体验 Fastify 自动校验（无效参数直接返回 400）</li>
+        </ol>
+        <p>目标：理解 Fastify 的核心优势（校验 + 序列化）。</p>
+
+        <h3>Day 3：插件化拆分模块</h3>
+        <ol>
+          <li>拆分模块：<code>recipes</code>、<code>plans</code>、<code>shopping-list</code></li>
+          <li>使用 <code>register</code> + 路由前缀</li>
+          <li>理解封装（encapsulation）</li>
+        </ol>
+        <p>目标：建立可维护工程结构，避免单文件臃肿。</p>
+
+        <h3>Day 4：接入数据库（PostgreSQL）</h3>
+        <ol>
+          <li>ORM 二选一：<code>Drizzle</code>（轻量）或 <code>Prisma</code>（成熟）</li>
+          <li>跑通 <code>recipes</code> 表 CRUD</li>
+          <li>了解 migration 基本流程</li>
+        </ol>
+        <p>目标：从内存数据切换到持久化数据。</p>
+
+        <h3>Day 5：鉴权与安全</h3>
+        <ol>
+          <li>接入 <code>@fastify/jwt</code>（登录签发 token）</li>
+          <li>使用 <code>preHandler</code> 做受保护路由</li>
+          <li>加入 <code>@fastify/cors</code>、<code>@fastify/helmet</code></li>
+        </ol>
+        <p>目标：具备基础生产安全能力。</p>
+
+        <h3>Day 6：错误处理、日志与配置</h3>
+        <ol>
+          <li><code>setErrorHandler</code> 统一错误格式</li>
+          <li>使用 <code>@fastify/env</code> 管理环境变量</li>
+          <li>规范日志字段（requestId、userId）</li>
+        </ol>
+        <p>目标：提升可维护性与排障效率。</p>
+
+        <h3>Day 7：测试与文档</h3>
+        <ol>
+          <li>使用 <code>fastify.inject()</code> 编写接口测试</li>
+          <li>使用 <code>@fastify/swagger</code> 输出 API 文档</li>
+          <li>最小 CI：<code>lint + test</code></li>
+        </ol>
+        <p>目标：形成工程闭环。</p>
+
+        <h2>三、每周备菜助手 MVP 业务边界</h2>
+        <ul>
+          <li><code>auth</code>：登录、鉴权</li>
+          <li><code>recipes</code>：菜谱 CRUD</li>
+          <li><code>plans</code>：每周计划（按天/餐次）</li>
+          <li><code>shopping-list</code>：从周计划聚合采购清单</li>
+        </ul>
+        <p>最小业务闭环：<code>创建菜谱 -&gt; 生成周计划 -&gt; 自动汇总采购清单</code></p>
+
+        <h2>四、推荐技术栈（Fastify 入门友好）</h2>
+        <ul>
+          <li>服务框架：<code>fastify</code></li>
+          <li>语言：<code>TypeScript</code></li>
+          <li>数据库：<code>PostgreSQL</code></li>
+          <li>ORM：<code>Drizzle</code>（轻量）或 <code>Prisma</code>（成熟）</li>
+          <li>插件：<code>@fastify/jwt</code>、<code>@fastify/cors</code>、<code>@fastify/helmet</code>、<code>@fastify/swagger</code>、<code>@fastify/env</code></li>
+        </ul>
+
+        <h2>五、项目目录建议</h2>
+        <pre><code>meal-prep-assistant-api/
+  src/
+    app.ts
+    server.ts
+    plugins/
+      env.ts
+      jwt.ts
+      swagger.ts
+      db.ts
+    common/
+      errors.ts
+      response.ts
+      auth.ts
+    modules/
+      auth/
+        auth.route.ts
+        auth.service.ts
+        auth.schema.ts
+      recipes/
+        recipes.route.ts
+        recipes.service.ts
+        recipes.schema.ts
+      plans/
+        plans.route.ts
+        plans.service.ts
+        plans.schema.ts
+      shopping-list/
+        shopping-list.route.ts
+        shopping-list.service.ts
+        shopping-list.schema.ts
+    db/
+      schema/
+        user.ts
+        recipe.ts
+        weeklyPlan.ts
+      index.ts
+  tests/
+    auth.test.ts
+    recipes.test.ts
+  drizzle/
+  package.json
+  tsconfig.json
+  .env.example
+  docker-compose.yml</code></pre>
+
+        <h2>六、第一批依赖清单</h2>
+        <pre><code># runtime
+npm i fastify @fastify/cors @fastify/helmet @fastify/jwt @fastify/swagger @fastify/swagger-ui @fastify/env zod
+
+# db
+npm i drizzle-orm pg
+npm i -D drizzle-kit
+
+# dev
+npm i -D typescript tsx @types/node vitest eslint @typescript-eslint/parser @typescript-eslint/eslint-plugin</code></pre>
+
+        <h2>七、.env 示例</h2>
+        <pre><code>NODE_ENV=development
+PORT=3000
+HOST=0.0.0.0
+
+DATABASE_URL=postgres://postgres:postgres@localhost:5432/mealprep
+JWT_SECRET=replace_me
+JWT_EXPIRES_IN=7d</code></pre>
+
+        <h2>八、MVP 接口清单（第一批）</h2>
+        <ul>
+          <li><code>POST /auth/login</code>：手机号 + 验证码模拟登录，返回 token</li>
+          <li><code>GET /auth/me</code>：获取当前用户</li>
+          <li><code>POST /recipes</code>：新增菜谱（含食材数组）</li>
+          <li><code>GET /recipes</code>：查询菜谱列表</li>
+          <li><code>POST /plans/weekly</code>：创建周计划</li>
+          <li><code>GET /plans/weekly?week=2026-W11</code>：查询周计划</li>
+          <li><code>GET /shopping-list?week=2026-W11</code>：按周聚合采购清单（去重 + 分组）</li>
+        </ul>
+
+        <h2>九、最小数据模型建议</h2>
+        <ul>
+          <li><code>users</code>：<code>id</code>, <code>phone</code>, <code>nickname</code>, <code>created_at</code></li>
+          <li><code>recipes</code>：<code>id</code>, <code>user_id</code>, <code>name</code>, <code>steps</code>, <code>created_at</code></li>
+          <li><code>recipe_ingredients</code>：<code>id</code>, <code>recipe_id</code>, <code>name</code>, <code>amount</code>, <code>unit</code>, <code>category</code></li>
+          <li><code>weekly_plans</code>：<code>id</code>, <code>user_id</code>, <code>week_code</code></li>
+          <li><code>weekly_plan_items</code>：<code>id</code>, <code>weekly_plan_id</code>, <code>day_of_week</code>, <code>meal_type</code>, <code>recipe_id</code></li>
+        </ul>
+
+        <h2>十、团队工程规范（建议统一）</h2>
+        <ul>
+          <li>模块固定三层：<code>route -&gt; service -&gt; schema</code></li>
+          <li>所有接口都定义 <code>schema</code>（body/query/response）</li>
+          <li>受保护接口统一挂 <code>preHandler: [authenticate]</code></li>
+          <li>错误统一走 <code>setErrorHandler</code></li>
+          <li>路由层不写 SQL，数据库操作放在 service 层</li>
+          <li>响应结构统一：<code>{ code, message, data }</code></li>
+        </ul>
+
+        <h2>十一、7 天任务看板（可执行）</h2>
+        <ul>
+          <li>Day 1：初始化项目，跑通 <code>/health</code>，接入 Swagger</li>
+          <li>Day 2：接 PostgreSQL + ORM，建 <code>users/recipes</code></li>
+          <li>Day 3：完成 <code>auth</code>（登录 + 鉴权）</li>
+          <li>Day 4：完成 <code>recipes</code> CRUD</li>
+          <li>Day 5：完成 <code>plans</code> 周计划</li>
+          <li>Day 6：完成 <code>shopping-list</code> 聚合逻辑</li>
+          <li>Day 7：补测试、完善错误处理、补 README</li>
+        </ul>
+
+        <h2>十二、学习到运用难度评估（前端团队视角）</h2>
+        <ul>
+          <li>第 1 周：可独立开发 CRUD + 参数校验（低到中）</li>
+          <li>第 2 周：可完成鉴权、模块化、迁移（中）</li>
+          <li>第 3-4 周：可建立测试、文档、部署流程（中到中高）</li>
+        </ul>
+        <p>常见难点通常不在 Fastify 本身，而在数据建模、鉴权与权限设计、错误处理与测试习惯。</p>
+
+        <h2>十三、验收标准（用于评估是否可团队推广）</h2>
+        <ul>
+          <li>新人 2 天内可独立新增一个模块接口</li>
+          <li><code>npm run dev</code> 可稳定一次启动</li>
+          <li>Swagger 可直接调试核心接口</li>
+          <li>至少 6 条核心接口测试通过</li>
+          <li>可演示闭环：<code>菜谱 -&gt; 周计划 -&gt; 采购清单</code></li>
+        </ul>
+      </article>
+    </main>
+  </body>
+</html>
